@@ -1,0 +1,115 @@
+
+
+/*******************************************************************************************************************************/
+
+class Demo{
+
+	int x=10;                                                   //non static variable
+	static int y=20;                                            // static variable
+
+
+	/*******************************Block************************************/
+
+	static{
+	
+		System.out.println("In static block-1");               //In static block-1
+	}
+
+	{
+		System.out.println("In Non Static block-1");           //In Non static block-1
+
+	}
+
+	/********************************Constructor******************************/
+
+	/*
+	static Demo(){
+	
+		System.out.println("In static Demo-1");      // Error:modifier static not allowed here 
+	
+	}
+	
+	*/
+
+	Demo(){                  //internally -> Demo(Demo this)         // No argument constructor & class name Constructor name same
+	    
+		System.out.println("In Constructor Demo-1"); 
+	}
+
+	Demo(int x){                                                     //internally  -> Demo(Demo , this , x)
+	
+		System.out.println(this.x);
+	}
+
+
+	Demo(Demo ajay){                                                 // internally  ->  Demo(Demo , obj1 reference )
+	
+		System.out.println("In para");                           // In para
+		System.out.println(ajay);                                // obj1 reference
+		System.out.println(ajay.x);                              //10
+	}
+	
+	/*******************************Method(static and Non-Static)***********************/
+
+	static void fun(){
+	
+		System.out.println("Static method fun");                  //static method fun
+	}
+
+	void gun(){
+	
+		System.out.println("Non static method fun");              // Non static method fun
+	}
+
+	
+	/*******************************Main Method*****************************************/
+
+	public static void main(String [] args){
+	
+		Demo obj=new Demo();         // internally ->  Demo(obj)
+
+		Demo obj1=new Demo(10);      // internally ->  Demo(obj1 , x)
+
+		Demo obj2=new Demo(obj1);    // internally ->  Demo(obj1) 
+	
+		fun();                     
+			
+		obj.gun();                   // internally ->   gun(obj);
+	}
+}
+
+/*
+ *
+  *****************************************Output********************************************** 
+ 
+  Output: 
+	
+  	In static block-1
+	In Non Static block-1
+	In Constructor Demo-1
+	In Non Static block-1
+	10
+	In Non Static block-1
+	In para
+	Demo@d716361
+	10
+	Static method fun
+	Non static method fun
+
+
+
+  ****************************************Sequence******************************************************
+
+  Sequence:
+
+  	1) static variable
+	2) static block
+	3) static methods
+	4) instance variable
+	5) instance block
+	6) Constructor
+	7) instance methods & static methods -> depend on call function
+
+
+
+*/
